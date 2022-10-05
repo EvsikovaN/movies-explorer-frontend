@@ -1,0 +1,94 @@
+.movie__card {
+}
+
+.movie-card__item {
+  max-width: 300px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+.movie-card__image {
+  width: 100%;
+  height: 168px;
+  display: block;
+}
+
+.movie-card__info {
+  padding: 14px 12px;
+  position: relative;
+}
+
+.movie-card__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  margin-bottom: 8px;
+}
+
+.movie-card__time {
+  margin: 0;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #a0a0a0;
+}
+
+.movies-card__button {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  width: 14px;
+  height: 12px;
+  background-image: url(../../../images/like.svg);
+  display: block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.movies-card__button__liked{
+    background-image: url(../../../images/like-active.svg);
+}
+
+.movies-card__button_saved{
+    background-image: url(../../../images/movie-delite.svg);
+}
+
+@media screen and (min-width: 768px) {
+  .movie-card__item {
+    max-width: none;
+    display: flex;
+    height: 122px;
+    justify-content: space-between;
+    padding: 6px;
+    margin-bottom: 40px;
+  }
+
+  .movie-card__image {
+    width: 220px;
+    height: 100%;
+    order: 1;
+  }
+
+  .movie-card__info {
+    padding: 16px;
+  }
+
+  .movie-card__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 13px;
+  }
+
+  .movies-card__button{
+    position: static;
+    margin-top: 30px;
+  }
+}

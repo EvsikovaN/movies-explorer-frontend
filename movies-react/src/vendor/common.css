@@ -1,0 +1,46 @@
+.container {
+  margin: 0 auto;
+  padding: 0 14px;
+  max-width: 1280px;
+  box-sizing: border-box;
+}
+
+.section {
+  padding: 70px 0;
+}
+
+.heading {
+  margin: 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.04em;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #000000;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    padding: 0 50px;
+  }
+
+  .heading {
+    padding-bottom: 23px;
+    font-size: 22px;
+    line-height: 27px;
+  }
+
+  .section {
+    padding: 90px 0;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .container {
+    padding: 0 70px;
+  }
+
+  .section {
+    padding: 110px 0;
+  }
+}
