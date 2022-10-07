@@ -16,6 +16,7 @@ function SearchForm() {
             id="search__checkbox-input"
             name="search__checkbox-input"
             defaultValue="yes"
+            required
           />
           <label htmlFor="search__checkbox-input"></label>
           <p className="search__checkbox-title">Короткометражки</p>

@@ -89,6 +89,7 @@
     background-color: #000000;
     cursor: pointer;
     margin-top: 267px;
+    border-radius: 3px;
   }
   
   .login__question {

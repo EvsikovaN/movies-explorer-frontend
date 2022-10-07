@@ -11,8 +11,8 @@ function Profile() {
 
   return (
     <>
+      <MainHeader />
       <main>
-        <MainHeader />
         <section className="profile">
           <h1 className="profile__title">
             Привет, <span className="profile__name">Виталий!</span>
