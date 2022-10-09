@@ -1,5 +1,5 @@
-// export const BASE_URL = 'https://api.movies.evsikova.nomoredomains.sbs/';
-export const BASE_URL = 'http://localhost:3500/';
+export const BASE_URL = 'https://api.movies.evsikova.nomoredomains.sbs/';
+// export const BASE_URL = 'http://localhost:3500/';
 
 const checkResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);

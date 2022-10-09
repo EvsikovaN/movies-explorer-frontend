@@ -27,26 +27,6 @@ function MoviesCardList({
   checkedSaveMovies,
   allSavedMovies,
 }) {
-  // const isMovieSaved = isSaved;
-  // const movieCards = moviesList.map((movie) => {
-  //   return (
-  //     <li className="movie__card">
-  //       <MoviesCard
-  //         key={movie.id}
-  //         name={movie.nameRU}
-  //         duration={movie.duration}
-  //         trailerLink={movie.trailerLink}
-  //         thumbnail={`https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`}
-  //         savedMovies={savedMovies}
-  //         onSave={onSave}
-  //         onDelete={onDelete}
-  //         movie={movie}
-  //         allSavedMovies={allSavedMovies}
-  //       />
-  //     </li>
-  //   );
-  // });
-
   const [moviesToLoad, setMoviesToLoad] = useState(0);
   const [displayedMovies, setDisplayedMovies] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);

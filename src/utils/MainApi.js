@@ -61,8 +61,8 @@ export class Api {
 }
 
 const api = new Api({
-  // url: "https://api.movies.evsikova.nomoredomains.sbs/",
-  url: "http://localhost:3500/",
+  url: "https://api.movies.evsikova.nomoredomains.sbs/",
+  // url: "http://localhost:3500/",
 });
 
 export default api
