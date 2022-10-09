@@ -35,7 +35,6 @@ function SavedMovies({
           <Preloader />
         ) : (
           <MoviesCardList
-            isSaved={true}
             checked={checked}
             checkedSaveMovies={checkedSaveMovies}
             movies={movies}
