@@ -1,20 +1,52 @@
-import MainHeader from '../Header/MainHeader/MainHeader';
-import Footer from '../Footer/Footer';
+import MainHeader from "../Header/MainHeader/MainHeader";
+import Footer from "../Footer/Footer";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import SearchForm from "../Movies/SearchForm/SearchForm";
-import './SavedMovies.css';
+import Preloader from "../Movies/Preloader/Preloader";
+import "./SavedMovies.css";
 
-function SavedMovies() {
+function SavedMovies({
+  movies,
+  onSubmit,
+  isLoading,
+  isFailed,
+  isNotFound,
+  searchKeyword,
+  onCheckbox,
+  checked,
+  checkedSaveMovies,
+  savedMovies,
+  onSave,
+  onDelete,
+  allSavedMovies,
+}) {
   return (
     <>
       <MainHeader />
       <main>
-        <SearchForm />
-        <MoviesCardList isSaved={true}>
-          <div
-            className="movies__show-more">
-          </div>
-        </MoviesCardList>
+        <SearchForm
+          onSubmit={onSubmit}
+          searchKeyword={searchKeyword}
+          onCheckbox={onCheckbox}
+          checked={checked}
+          checkedSaveMovies={checkedSaveMovies}
+        />
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList
+            isSaved={true}
+            checked={checked}
+            checkedSaveMovies={checkedSaveMovies}
+            movies={movies}
+            isNotFound={isNotFound}
+            isFailed={isFailed}
+            savedMovies={savedMovies}
+            onSave={onSave}
+            onDelete={onDelete}
+            allSavedMovies={allSavedMovies}
+          />
+        )}
       </main>
       <Footer />
     </>

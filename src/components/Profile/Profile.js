@@ -1,50 +1,105 @@
 import "./Profile.css";
-import { useState } from "react";
 import MainHeader from "../Header/MainHeader/MainHeader";
+import { useState, useContext } from "react";
+import { useFormWithValidation } from "../../utils/formValidation";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Profile() {
+function Profile({ onUpdateUser, onSignOut, isMessageProfile }) {
+  const currentUser = useContext(CurrentUserContext);
   const [isEditInput, setIsEditInput] = useState(true);
+  const controlInput = useFormWithValidation();
+  const { nameErr, emailErr } = controlInput.errors;
+  const errorClassName = !controlInput.isValid
+    ? "profile__error profile__error_visible"
+    : "profile__error";
+
   const toggleInput = (e) => {
     e.preventDefault();
     setIsEditInput((state) => !state);
   };
+
+  let disableUserCurrentCheck =
+    (currentUser.name === controlInput?.values?.name &&
+      typeof controlInput?.values?.email === "undefined") ||
+    (currentUser.email === controlInput?.values?.email &&
+      typeof controlInput?.values?.email === "undefined");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { name, email } = controlInput.values;
+    if (!name) {
+      onUpdateUser(currentUser.name, email);
+    } else if (!email) {
+      onUpdateUser(name, currentUser.email);
+    } else {
+      onUpdateUser(name, email);
+    }
+    setTimeout(() => setIsEditInput((state) => !state), 1000);
+    controlInput.resetForm();
+  };
+
+  let classNameMessageBtn = isMessageProfile
+    ? "profile__button-msg"
+    : "profile__button-msg profile__button-msg_hidden";
 
   return (
     <>
       <MainHeader />
       <main>
         <section className="profile">
-          <h1 className="profile__title">
-            Привет, <span className="profile__name">Виталий!</span>
-          </h1>
-          <form className="profile__form">
+          <h1 className="profile__title">Привет, {currentUser.name}</h1>
+          <form className="profile__form" onSubmit={handleSubmit} noValidate>
             <section className="profile__form-section">
               <span className="profile__label">Имя</span>
               <input
                 type="text"
                 className="profile__input"
                 name="name"
-                minLength="{2}"
-                maxLength="{30}"
-                required="{true}"
-                placeholder="Имя"
+                minLength="2"
+                maxLength="40"
+                required
+                placeholder={currentUser.name}
                 {...(!isEditInput ? {} : { disabled: true })}
+                pattern="[A-Za-zА-Яа-яЁё\s-]+"
+                onChange={controlInput.handleChange}
+                value={controlInput?.values?.name ?? currentUser.name}
               />
             </section>
+            <span className={errorClassName}>{nameErr}</span>
             <section className="profile__form-section">
               <span className="profile__label">E-mail</span>
               <input
                 type="email"
                 className="profile__input"
                 name="email"
-                required="{true}"
-                placeholder="pochta@yandex.ru"
+                minLength="5"
+                maxLength="40"
+                required
+                placeholder={currentUser.email}
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                onChange={controlInput.handleChange}
+                value={controlInput?.values?.email ?? currentUser.email}
                 {...(!isEditInput ? {} : { disabled: true })}
               />
             </section>
+            <span className={errorClassName}>{emailErr}</span>
+            {!isEditInput && (
+              <>
+                <span className={classNameMessageBtn}>
+                  Изменение данных прошло успешно!
+                </span>
+                <button
+                  type="submit"
+                  className="profile__save"
+                  disabled={disableUserCurrentCheck || !controlInput.isValid}
+                >
+                  Сохранить
+                </button>
+              </>
+            )}
           </form>
 
-          {isEditInput ? (
+          {isEditInput && (
             <ul className="profile__navigation">
               <li className="profile__item">
                 <button className="profile__edit" onClick={toggleInput}>
@@ -52,17 +107,11 @@ function Profile() {
                 </button>
               </li>
               <li className="profile__item">
-                <button className="profile__logout">Выйти из аккаунта</button>
+                <button className="profile__logout" onClick={onSignOut}>
+                  Выйти из аккаунта
+                </button>
               </li>
             </ul>
-          ) : (
-            <button
-              type="submit"
-              className="profile__save"
-              onClick={toggleInput}
-            >
-              Сохранить
-            </button>
           )}
         </section>
       </main>

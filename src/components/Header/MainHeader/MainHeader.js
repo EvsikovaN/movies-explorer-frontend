@@ -1,5 +1,5 @@
 import "./MainHeader.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import MobileMenu from '../MobileMenu/MobileMenu';
 
@@ -14,14 +14,14 @@ function MainHeader() {
       <nav className="main-header__navigation">
         <ul className="main-header__list">
           <li className="main-header__item">
-            <Link to="/movies" className="main-header__link main-header__link_active">
+            <NavLink to="/movies" className="main-header__link">
               Фильмы
-            </Link>
+            </NavLink>
           </li>
           <li className="main-header__item">
-            <Link to="/saved-movies" className="main-header__link">
+            <NavLink to="/saved-movies" className="main-header__link">
               Сохранённые фильмы
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </nav>
