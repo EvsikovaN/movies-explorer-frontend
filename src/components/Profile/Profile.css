@@ -110,6 +110,27 @@
   cursor: pointer;
   margin-top: 379px;
   border-radius: 3px;
+  transition: opacity 0.3s;
+}
+
+.profile__button-msg{
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0;
+  margin-top: 10px;
+  text-align: center;
+  display: block;
+  color: #3ddc84;
+} 
+
+.profile__button-msg_hidden{
+  display: none;
+}
+
+.profile__save:disabled{
+  opacity: 0.7;
 }
 
 @media screen and (min-width: 768px) {

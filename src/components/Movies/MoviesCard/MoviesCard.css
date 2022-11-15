@@ -25,6 +25,7 @@
   font-size: 12px;
   line-height: 15px;
   margin-bottom: 8px;
+  max-width: 250px;
 }
 
 .movie-card__time {
@@ -53,11 +54,11 @@
   right: 16px;
 }
 
-.movies-card__button__liked{
+.movies-card__button_save{
     background-image: url(../../../images/like-active.svg);
 }
 
-.movies-card__button_saved{
+.movies-card__button_delete{
     background-image: url(../../../images/movie-delite.svg);
 }
 
@@ -71,10 +72,13 @@
     margin-bottom: 40px;
   }
 
+  .movie-card__trailer{
+    order: 1;
+  }
+
   .movie-card__image {
     width: 220px;
     height: 100%;
-    order: 1;
   }
 
   .movie-card__info {
@@ -85,10 +89,12 @@
     font-size: 18px;
     line-height: 22px;
     margin-bottom: 13px;
+    max-width: none;
   }
 
   .movies-card__button{
-    position: static;
-    margin-top: 30px;
+    top: inherit;
+    bottom: 16px;
+    left: 16px;
   }
 }

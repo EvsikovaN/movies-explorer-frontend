@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import './MobileMenu.css';
 
 function MobileMenu({ isOpen, isClose }) {
+
   return (
     <div className={`mobile-menu ${isOpen && 'active'}`}>
       <div className='mobile-menu__container'>

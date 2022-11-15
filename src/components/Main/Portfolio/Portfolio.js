@@ -2,22 +2,22 @@ import "./Portfolio.css";
 
 function Portfolio() {
   return (
-    <section class="portfolio">
-      <div class="container">
-        <p class="portfolio__title">Портфолио</p>
-        <ul class="portfolio__list">
-          <li class="portfolio__item">
-            <a href="https://github.com/EvsikovaN/how-to-learn" target='_blank' rel='noreferrer' class="portfolio__link">
+    <section className="portfolio">
+      <div className="container">
+        <p className="portfolio__title">Портфолио</p>
+        <ul className="portfolio__list">
+          <li className="portfolio__item">
+            <a href="https://github.com/EvsikovaN/how-to-learn" target='_blank' rel='noreferrer' className="portfolio__link">
               Статичный сайт
             </a>
           </li>
-          <li class="portfolio__item">
-            <a href="https://github.com/EvsikovaN/russian-travel" target='_blank' rel='noreferrer' class="portfolio__link">
+          <li className="portfolio__item">
+            <a href="https://github.com/EvsikovaN/russian-travel" target='_blank' rel='noreferrer' className="portfolio__link">
               Адаптивный сайт
             </a>
           </li>
-          <li class="portfolio__item">
-            <a href="https://github.com/EvsikovaN/react-mesto-api-full" target='_blank' rel='noreferrer' class="portfolio__link">
+          <li className="portfolio__item">
+            <a href="https://github.com/EvsikovaN/react-mesto-api-full" target='_blank' rel='noreferrer' className="portfolio__link">
               Одностраничное приложение
             </a>
           </li>
