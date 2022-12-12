@@ -2,27 +2,25 @@ import "./SearchForm.css";
 import Checkbox from "../Checkbox/Checkbox";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { ERROR_MESSAGE_SEARCH_FORM } from "../../../utils/constants";
 
 function SearchForm({
   onSubmit,
+  isLoading,
   searchKeyword,
-  onCheckbox,
-  checked,
-  checkedSaveMovies,
+  handleCheckbox,
+  checkedAllMovies,
+  checkedSavedMovies,
 }) {
-  const [errorText, setErrorText] = useState("");
-  const [keyword, setKeyword] = useState("");
-  const [isFormValid, setIsFormValid] = useState(false);
   const location = useLocation();
 
-  useEffect(() => {
-    if (searchKeyword && location.pathname === "/movies") {
-      setKeyword(searchKeyword);
-    }
-  }, []);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [keyword, setKeyword] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const handleChange = (evt) => {
     setKeyword(evt.target.value);
+
     setIsFormValid(evt.target.closest("form").checkValidity());
   };
 
@@ -30,39 +28,49 @@ function SearchForm({
     evt.preventDefault();
 
     setIsFormValid(evt.target.closest("form").checkValidity());
-    if (!isFormValid) {
-      return setErrorText("Нужно ввести ключевое слово");
-    }
-    onSubmit(keyword);
+
+    isFormValid
+      ? onSubmit(keyword)
+      : setErrorMessage(ERROR_MESSAGE_SEARCH_FORM.SEARCH_KEYWORD_ERROR);
   };
+
+  useEffect(() => {
+    if (location.pathname === "/movies" && searchKeyword) {
+      setKeyword(searchKeyword);
+    }
+  }, []);
 
   return (
     <section className="search">
       <form
         action="#"
+        name="search-form"
         className="search__form"
-        noValidate
         onSubmit={handleSubmit}
+        noValidate
       >
         <input
-          type="text"
           className="search__input"
+          type="text"
+          name="search"
           placeholder="Фильм"
+          minLength="1"
+          maxLength="30"
           required
           onChange={handleChange}
           value={keyword}
-          minLength="1"
-          maxLength="30"
         />
-        <button type="submit" className="search__button">
+        <button type="submit" className="search__button" disabled={isLoading}>
           Найти
         </button>
-        <span className="search__form-error">{!isFormValid && errorText}</span>
+        <span className="search__form-error">
+          {!isFormValid && errorMessage}
+        </span>
       </form>
       <Checkbox
-        onCheckbox={onCheckbox}
-        checked={checked}
-        checkedSaveMovies={checkedSaveMovies}
+        handleCheckbox={handleCheckbox}
+        checkedAllMovies={checkedAllMovies}
+        checkedSavedMovies={checkedSavedMovies}
       />
     </section>
   );

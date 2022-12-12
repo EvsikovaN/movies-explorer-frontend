@@ -1,5 +1,6 @@
-export const BASE_URL = 'https://api.movies.evsikova.nomoredomains.sbs/';
+// export const BASE_URL = 'https://api.movies.evsikova.nomoredomains.sbs/';
 // export const BASE_URL = 'http://localhost:3500/';
+import { BASE_URL } from './constants';
 
 const checkResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
@@ -38,29 +39,6 @@ export const checkToken = (token) => {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
-    },
-  }).then(checkResponse);
-};
-
-export const updateUserInfo = (name, email) => {
-  return fetch(`${BASE_URL}users/me`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-    },
-    body: JSON.stringify({
-      name: name,
-      email: email,
-    }),
-  }).then(checkResponse);
-};
-
-export const getUserInfo = () => {
-  return fetch(`${BASE_URL}users/me`, {
-    headers: {
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('jwt')}`,
     },
   }).then(checkResponse);
 };
