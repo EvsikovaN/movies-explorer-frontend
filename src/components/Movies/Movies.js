@@ -5,19 +5,19 @@ import SearchForm from "./SearchForm/SearchForm";
 import Preloader from "./Preloader/Preloader";
 
 function Movies({
-  onSubmit,
   movies,
-  isLoading,
-  isFailed,
-  isNotFound,
-  searchKeyword,
   savedMovies,
-  onSave,
+  onLiked,
   onDelete,
-  onCheckbox,
-  checked,
-  checkedSaveMovies,
-  allSavedMovies,
+  onSubmit,
+  isLoading,
+  isUnsuccess,
+  isNotResults,
+  checkedAllMovies,
+  checkedSavedMovies,
+  handleCheckbox,
+  listSavedMovies,
+  searchKeyword,
 }) {
   return (
     <>
@@ -25,27 +25,25 @@ function Movies({
       <main>
         <SearchForm
           onSubmit={onSubmit}
+          isLoading={isLoading}
           searchKeyword={searchKeyword}
-          onCheckbox={onCheckbox}
-          checked={checked}
-          checkedSaveMovies={checkedSaveMovies}
+          handleCheckbox={handleCheckbox}
+          checkedAllMovies={checkedAllMovies}
+          checkedSavedMovies={checkedSavedMovies}
         />
         {isLoading ? (
           <Preloader />
         ) : (
           <MoviesCardList
-            isSaved={false}
             movies={movies}
-            isNotFound={isNotFound}
-            isFailed={isFailed}
-            searchKeyword={searchKeyword}
             savedMovies={savedMovies}
-            onSave={onSave}
+            onLiked={onLiked}
             onDelete={onDelete}
-            onCheckbox={onCheckbox}
-            checked={checked}
-            checkedSaveMovies={checkedSaveMovies}
-            allSavedMovies={allSavedMovies}
+            isUnsuccess={isUnsuccess}
+            isNotResults={isNotResults}
+            checkedAllMovies={checkedAllMovies}
+            checkedSavedMovies={checkedSavedMovies}
+            listSavedMovies={listSavedMovies}
           />
         )}
       </main>

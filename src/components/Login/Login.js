@@ -1,24 +1,28 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
+import { EMAIL_VALID_PATTERN } from "../../utils/constants";
 import { useFormWithValidation } from "../../utils/formValidation";
 
-function Login({ onLogin, isLoginMessage, isErrorLoginBtn }) {
-  const controlInput = useFormWithValidation();
-  const { email, password } = controlInput.errors;
-  const errorClassName = !controlInput.isValid
-    ? "login__error login__error_visible"
-    : "login__error";
+function Login({ handleLogin, isLoginMessage, isLoginError }) {
+  const validateInput = useFormWithValidation();
 
-  const errorClassNameBtn = isErrorLoginBtn
-    ? "login__error login__error_visible"
-    : "login__error";
+  const { email, password } = validateInput.errors;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = controlInput.values;
-    onLogin(email, password);
-    controlInput.resetForm();
+    const { email, password } = validateInput.values;
+    handleLogin(email, password);
+    validateInput.resetForm();
   };
+
+  const errorInputClassName = validateInput.isValid
+    ? "login__error"
+    : "login__error login__error_hidden";
+
+  const errorLoginMessageClassName = !isLoginError
+    ? "login__error"
+    : "login__error login__error_hidden";
+
   return (
     <main>
       <section className="login">
@@ -38,15 +42,16 @@ function Login({ onLogin, isLoginMessage, isErrorLoginBtn }) {
               className="login__input login__input_type_email"
               type="email"
               name="email"
+              id="email"
               placeholder="Email"
               minLength="5"
-              maxLength="40"
-              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-              onChange={controlInput.handleChange}
-              value={controlInput?.values?.email || ""}
+              maxLength="30"
               required
+              pattern={EMAIL_VALID_PATTERN}
+              onChange={validateInput.handleChange}
+              value={validateInput?.values?.email || ""}
             />
-            <span className={errorClassName}>{email}</span>
+            <span className={errorInputClassName}>{email}</span>
           </section>
           <section className="login__form-section">
             <span className="login__label">Пароль</span>
@@ -54,20 +59,21 @@ function Login({ onLogin, isLoginMessage, isErrorLoginBtn }) {
               className="login__input popup__input_type_password"
               type="password"
               name="password"
+              id="password"
               placeholder="Пароль"
               minLength="5"
-              maxLength="40"
-              onChange={controlInput.handleChange}
-              value={controlInput?.values?.password || ""}
+              maxLength="30"
               required
+              onChange={validateInput.handleChange}
+              value={validateInput?.values?.password || ""}
             />
-            <span className={errorClassName}>{password}</span>
+            <span className={errorInputClassName}>{password}</span>
           </section>
-          <span className={errorClassNameBtn}>{isLoginMessage}</span>
+          <span className={errorLoginMessageClassName}>{isLoginMessage}</span>
           <button
             type="submit"
             className="login__save"
-            disabled={!controlInput.isValid}
+            disabled={!validateInput.isValid}
           >
             Войти
           </button>

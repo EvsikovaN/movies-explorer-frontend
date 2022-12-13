@@ -1,36 +1,25 @@
 import "./Checkbox.css";
 import { useLocation } from "react-router-dom";
 
-function Checkbox({ onCheckbox, checked, checkedSaveMovies }) {
+function Checkbox({ handleCheckbox, checkedAllMovies, checkedSavedMovies }) {
   const location = useLocation();
-  const handleCheckbox = (evt) => {
-    onCheckbox(evt.target.checked);
+
+  const handleChange = (evt) => {
+    handleCheckbox(evt.target.checked);
   };
 
   return (
     <div className="checkbox">
-      {location.pathname === "/movies" ? (
         <input
-          type="checkbox"
           className="checkbox__input"
-          id="checkbox__input"
-          name="checkbox__input"
-          defaultValue="yes"
-          checked={checked}
-          onChange={handleCheckbox}
-        />
-      ) : (
-        <input
           type="checkbox"
-          className="checkbox__input"
-          id="checkbox__input"
           name="checkbox__input"
+          id="checkbox__input"
           defaultValue="yes"
-          checked={checkedSaveMovies}
-          onChange={handleCheckbox}
+          onChange={handleChange}
+          checked={location.pathname === "/movies" ? checkedAllMovies : checkedSavedMovies}
         />
-      )}
-      <label htmlFor="checkbox__input"></label>
+      <label htmlFor="checkbox__input" />
       <p className="checkbox__title">Короткометражки</p>
     </div>
   );

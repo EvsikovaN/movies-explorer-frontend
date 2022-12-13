@@ -2,64 +2,72 @@ import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
 
 function MoviesCard({
+  movie,
   name,
   duration,
   thumbnail,
   trailerLink,
-  savedMovies,
-  onSave,
+  onLiked,
   onDelete,
-  movie,
-  allSavedMovies,
+  savedMovies,
+  listSavedMovies,
 }) {
   const location = useLocation();
-  let hours = Math.floor(duration / 60);
-  let minutes = Math.floor(duration - hours * 60);
-  const isSaved = savedMovies.some((m) => m.movieId === movie.id);
-  const isAllSaved = allSavedMovies.some((m) => m.movieId === movie.id);
 
-  let buttonClassName =
-    isSaved || isAllSaved
-      ? "movies-card__button movies-card__button_save"
-      : "movies-card__button";
+  const getMovieDuration = (duration) => {
+    const hours = Math.floor(duration / 60);
+    const minutes = Math.floor(duration - hours * 60);
 
-  const handleSaveClick = () => {
-    if (isSaved) {
+    return `${hours}ч ${minutes}м`;
+  }
+
+  const isLiked = savedMovies.some((item) => item.movieId === movie.id);
+  // const isAllSaved = listSavedMovies.some((item) => item.movieId === movie.id);
+
+  const handleLike = () => {
+    if (isLiked) {
       onDelete(savedMovies.filter((m) => m.movieId === movie.id)[0]);
     } else {
-      onSave(movie);
+      onLiked(movie);
     }
   };
 
-  const handleDeleteMovie = () => onDelete(movie);
+  const handleDeleteLike = () => onDelete(movie);
+
+  const buttonDeleteLike = "movies-card__button movies-card__button_delete";
+
+  let buttonClassName =
+    isLiked 
+      ? "movies-card__button movies-card__button_like"
+      : "movies-card__button";
 
   return (
     <div className="movie-card__item">
       <a
-        href={trailerLink}
         className="movie-card__trailer"
+        href={trailerLink}
         target="_blank"
         rel="noreferrer"
       >
-        <img src={thumbnail} alt={name} className="movie-card__image" />
+        <img className="movie-card__image" src={thumbnail} alt={name} />
       </a>
       <div className="movie-card__info">
         <h3 className="movie-card__title">{name}</h3>
         <div className="movie-card__time">
-          {hours}ч{minutes}м
+          {getMovieDuration(duration)}
         </div>
         {location.pathname === "/movies" && (
           <button
             className={buttonClassName}
             type="button"
-            onClick={handleSaveClick}
+            onClick={handleLike}
           ></button>
         )}
         {location.pathname === "/saved-movies" && (
           <button
-            className="movies-card__button movies-card__button_delete"
+            className={buttonDeleteLike}
             type="button"
-            onClick={handleDeleteMovie}
+            onClick={handleDeleteLike}
           ></button>
         )}
       </div>

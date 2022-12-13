@@ -1,15 +1,28 @@
+// import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./NotFoundPage.css";
 
-function NotFoundPage() {
+function NotFoundPage({ loggedIn }) {
+  // const navigate = useNavigate();
+
   return (
     <main>
       <div className="error">
         <h2 className="error__title">404</h2>
         <p className="error__description">Страница не найдена</p>
-        <Link className="error__link" to={-1}>
+        {loggedIn ? (
+          <Link className="error__link" to={-2}>
+            Назад
+          </Link>
+        ) : (
+          <Link className="error__link" to={-1}>
+            Назад
+          </Link>
+        )}
+        {/* <Link className="error__link" to={-1}>
           Назад
-        </Link>
+        </Link> */}
+        {/* <button type='button' className='error__link' onClick={() => navigate(-3)}>Назад</button> */}
       </div>
     </main>
   );
