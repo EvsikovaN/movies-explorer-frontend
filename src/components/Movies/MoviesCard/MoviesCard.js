@@ -22,7 +22,7 @@ function MoviesCard({
   }
 
   const isLiked = savedMovies.some((item) => item.movieId === movie.id);
-  const isAllSaved = listSavedMovies.some((item) => item.movieId === movie.id);
+  // const isAllSaved = listSavedMovies.some((item) => item.movieId === movie.id);
 
   const handleLike = () => {
     if (isLiked) {
@@ -37,7 +37,7 @@ function MoviesCard({
   const buttonDeleteLike = "movies-card__button movies-card__button_delete";
 
   let buttonClassName =
-    isLiked || isAllSaved
+    isLiked 
       ? "movies-card__button movies-card__button_like"
       : "movies-card__button";
 
