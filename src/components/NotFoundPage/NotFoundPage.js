@@ -11,7 +11,7 @@ function NotFoundPage({ loggedIn }) {
         <h2 className="error__title">404</h2>
         <p className="error__description">Страница не найдена</p>
         {loggedIn ? (
-          <Link className="error__link" to={-3}>
+          <Link className="error__link" to={-2}>
             Назад
           </Link>
         ) : (
