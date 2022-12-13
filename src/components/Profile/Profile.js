@@ -14,7 +14,7 @@ function Profile({ onUpdateUser, onSignOut, isProfileMessage }) {
 
   const validateInput = useFormWithValidation();
 
-  const { nameError, emailError } = validateInput.errors;
+  const { name, email } = validateInput.errors;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -80,7 +80,7 @@ function Profile({ onUpdateUser, onSignOut, isProfileMessage }) {
               />
             </section>
 
-            <span className={errorClassName}>{nameError}</span>
+            <span className={errorClassName}>{name}</span>
 
             <section className="profile__form-section">
               <span className="profile__label">E-mail</span>
@@ -99,7 +99,7 @@ function Profile({ onUpdateUser, onSignOut, isProfileMessage }) {
               />
             </section>
             
-            <span className={errorClassName}>{emailError}</span>
+            <span className={errorClassName}>{email}</span>
 
             {isEditInput ? (
               <ul className="profile__navigation">

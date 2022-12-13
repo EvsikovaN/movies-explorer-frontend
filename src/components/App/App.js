@@ -44,34 +44,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isUnsuccess, setUnsuccess] = useState(false);
 
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     mainApi
-  //       .getLikedMovies()
-  //       .then((res) => {
-  //         setSavedMovies(res);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //     mainApi
-  //       .getUserInfo()
-  //       .then((data) => {
-  //         setCurrentUser(data);
-  //       })
-  //       .catch((err) => {
-  //         console.error(`Данные пользователя не получены: ${err}`);
-  //       });
-  //     if (JSON.parse(localStorage.getItem("filteredMovies"))) {
-  //       setMovies(JSON.parse(localStorage.getItem("filteredMovies")));
-  //       setChecked(JSON.parse(localStorage.getItem("checkbox")));
-  //       setCheckedSaveMovies(
-  //         JSON.parse(localStorage.getItem("checkboxSaveMovies"))
-  //       );
-  //     }
-  //   }
-  // }, [loggedIn]);
-
   useEffect(() => {
     if (loggedIn) {
       Promise.all([mainApi.getLikedMovies(), mainApi.getUserInfo()])
@@ -387,7 +359,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage loggedIn={loggedIn}/>} />
         </Routes>
       </CurrentUserContext.Provider>
     </div>
